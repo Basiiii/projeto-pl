@@ -1,0 +1,1615 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    MULTI_COMMENT
+    SINGLE_COMMENT
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> command
+Rule 2     program -> program command
+Rule 3     command -> table_command
+Rule 4     command -> query_command
+Rule 5     command -> create_command
+Rule 6     command -> procedure_command
+Rule 7     command -> call_command
+Rule 8     table_command -> import_command
+Rule 9     table_command -> export_command
+Rule 10    table_command -> discard_command
+Rule 11    table_command -> rename_command
+Rule 12    table_command -> print_command
+Rule 13    import_command -> IMPORT TABLE ID FROM STRING
+Rule 14    export_command -> EXPORT TABLE ID AS STRING
+Rule 15    discard_command -> DISCARD TABLE ID
+Rule 16    rename_command -> RENAME TABLE ID ID
+Rule 17    print_command -> PRINT TABLE ID
+Rule 18    query_command -> select_command
+Rule 19    query_command -> select_where_command
+Rule 20    query_command -> select_limit_command
+Rule 21    query_command -> select_where_limit_command
+Rule 22    select_command -> SELECT select_list FROM ID
+Rule 23    select_where_command -> SELECT select_list FROM ID WHERE condition
+Rule 24    select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER
+Rule 25    select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER
+Rule 26    select_list -> ASTERISK
+Rule 27    select_list -> id_list
+Rule 28    id_list -> ID
+Rule 29    id_list -> id_list COMMA ID
+Rule 30    condition -> ID EQUALS value
+Rule 31    condition -> ID NOT_EQUALS value
+Rule 32    condition -> ID LESS_THAN value
+Rule 33    condition -> ID GREATER_THAN value
+Rule 34    condition -> ID LESS_EQUALS value
+Rule 35    condition -> ID GREATER_EQUALS value
+Rule 36    condition -> condition AND condition
+Rule 37    value -> ID
+Rule 38    value -> STRING
+Rule 39    value -> NUMBER
+Rule 40    create_command -> create_select_command
+Rule 41    create_command -> create_join_command
+Rule 42    create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition
+Rule 43    create_select_command -> CREATE TABLE ID SELECT select_list FROM ID
+Rule 44    create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID
+Rule 45    procedure_command -> PROCEDURE ID DO procedure_body END
+Rule 46    procedure_body -> command
+Rule 47    procedure_body -> procedure_body command
+Rule 48    call_command -> CALL ID
+
+Terminals, with rules where they appear
+
+AND                  : 36
+AS                   : 14
+ASTERISK             : 26
+CALL                 : 48
+COMMA                : 29
+CREATE               : 42 43 44
+DISCARD              : 15
+DO                   : 45
+END                  : 45
+EQUALS               : 30
+EXPORT               : 14
+FROM                 : 13 22 23 24 25 42 43 44
+GREATER_EQUALS       : 35
+GREATER_THAN         : 33
+ID                   : 13 14 15 16 16 17 22 23 24 25 28 29 30 31 32 33 34 35 37 42 42 43 43 44 44 44 44 45 48
+IMPORT               : 13
+JOIN                 : 44
+LESS_EQUALS          : 34
+LESS_THAN            : 32
+LIMIT                : 24 25
+MULTI_COMMENT        : 
+NOT_EQUALS           : 31
+NUMBER               : 24 25 39
+PRINT                : 17
+PROCEDURE            : 45
+RENAME               : 16
+SELECT               : 22 23 24 25 42 43
+SINGLE_COMMENT       : 
+STRING               : 13 14 38
+TABLE                : 13 14 15 16 17 42 43 44
+USING                : 44
+WHERE                : 23 25 42
+error                : 
+
+Nonterminals, with rules where they appear
+
+call_command         : 7
+command              : 1 2 46 47
+condition            : 23 25 36 36 42
+create_command       : 5
+create_join_command  : 41
+create_select_command : 40
+discard_command      : 10
+export_command       : 9
+id_list              : 27 29
+import_command       : 8
+print_command        : 12
+procedure_body       : 45 47
+procedure_command    : 6
+program              : 2 0
+query_command        : 4
+rename_command       : 11
+select_command       : 18
+select_limit_command : 20
+select_list          : 22 23 24 25 42 43
+select_where_command : 19
+select_where_limit_command : 21
+table_command        : 3
+value                : 30 31 32 33 34 35
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . command
+    (2) program -> . program command
+    (3) command -> . table_command
+    (4) command -> . query_command
+    (5) command -> . create_command
+    (6) command -> . procedure_command
+    (7) command -> . call_command
+    (8) table_command -> . import_command
+    (9) table_command -> . export_command
+    (10) table_command -> . discard_command
+    (11) table_command -> . rename_command
+    (12) table_command -> . print_command
+    (18) query_command -> . select_command
+    (19) query_command -> . select_where_command
+    (20) query_command -> . select_limit_command
+    (21) query_command -> . select_where_limit_command
+    (40) create_command -> . create_select_command
+    (41) create_command -> . create_join_command
+    (45) procedure_command -> . PROCEDURE ID DO procedure_body END
+    (48) call_command -> . CALL ID
+    (13) import_command -> . IMPORT TABLE ID FROM STRING
+    (14) export_command -> . EXPORT TABLE ID AS STRING
+    (15) discard_command -> . DISCARD TABLE ID
+    (16) rename_command -> . RENAME TABLE ID ID
+    (17) print_command -> . PRINT TABLE ID
+    (22) select_command -> . SELECT select_list FROM ID
+    (23) select_where_command -> . SELECT select_list FROM ID WHERE condition
+    (24) select_limit_command -> . SELECT select_list FROM ID LIMIT NUMBER
+    (25) select_where_limit_command -> . SELECT select_list FROM ID WHERE condition LIMIT NUMBER
+    (42) create_select_command -> . CREATE TABLE ID SELECT select_list FROM ID WHERE condition
+    (43) create_select_command -> . CREATE TABLE ID SELECT select_list FROM ID
+    (44) create_join_command -> . CREATE TABLE ID FROM ID JOIN ID USING ID
+
+    PROCEDURE       shift and go to state 19
+    CALL            shift and go to state 20
+    IMPORT          shift and go to state 21
+    EXPORT          shift and go to state 22
+    DISCARD         shift and go to state 23
+    RENAME          shift and go to state 24
+    PRINT           shift and go to state 25
+    SELECT          shift and go to state 26
+    CREATE          shift and go to state 27
+
+    program                        shift and go to state 1
+    command                        shift and go to state 2
+    table_command                  shift and go to state 3
+    query_command                  shift and go to state 4
+    create_command                 shift and go to state 5
+    procedure_command              shift and go to state 6
+    call_command                   shift and go to state 7
+    import_command                 shift and go to state 8
+    export_command                 shift and go to state 9
+    discard_command                shift and go to state 10
+    rename_command                 shift and go to state 11
+    print_command                  shift and go to state 12
+    select_command                 shift and go to state 13
+    select_where_command           shift and go to state 14
+    select_limit_command           shift and go to state 15
+    select_where_limit_command     shift and go to state 16
+    create_select_command          shift and go to state 17
+    create_join_command            shift and go to state 18
+
+state 1
+
+    (0) S' -> program .
+    (2) program -> program . command
+    (3) command -> . table_command
+    (4) command -> . query_command
+    (5) command -> . create_command
+    (6) command -> . procedure_command
+    (7) command -> . call_command
+    (8) table_command -> . import_command
+    (9) table_command -> . export_command
+    (10) table_command -> . discard_command
+    (11) table_command -> . rename_command
+    (12) table_command -> . print_command
+    (18) query_command -> . select_command
+    (19) query_command -> . select_where_command
+    (20) query_command -> . select_limit_command
+    (21) query_command -> . select_where_limit_command
+    (40) create_command -> . create_select_command
+    (41) create_command -> . create_join_command
+    (45) procedure_command -> . PROCEDURE ID DO procedure_body END
+    (48) call_command -> . CALL ID
+    (13) import_command -> . IMPORT TABLE ID FROM STRING
+    (14) export_command -> . EXPORT TABLE ID AS STRING
+    (15) discard_command -> . DISCARD TABLE ID
+    (16) rename_command -> . RENAME TABLE ID ID
+    (17) print_command -> . PRINT TABLE ID
+    (22) select_command -> . SELECT select_list FROM ID
+    (23) select_where_command -> . SELECT select_list FROM ID WHERE condition
+    (24) select_limit_command -> . SELECT select_list FROM ID LIMIT NUMBER
+    (25) select_where_limit_command -> . SELECT select_list FROM ID WHERE condition LIMIT NUMBER
+    (42) create_select_command -> . CREATE TABLE ID SELECT select_list FROM ID WHERE condition
+    (43) create_select_command -> . CREATE TABLE ID SELECT select_list FROM ID
+    (44) create_join_command -> . CREATE TABLE ID FROM ID JOIN ID USING ID
+
+    PROCEDURE       shift and go to state 19
+    CALL            shift and go to state 20
+    IMPORT          shift and go to state 21
+    EXPORT          shift and go to state 22
+    DISCARD         shift and go to state 23
+    RENAME          shift and go to state 24
+    PRINT           shift and go to state 25
+    SELECT          shift and go to state 26
+    CREATE          shift and go to state 27
+
+    command                        shift and go to state 28
+    table_command                  shift and go to state 3
+    query_command                  shift and go to state 4
+    create_command                 shift and go to state 5
+    procedure_command              shift and go to state 6
+    call_command                   shift and go to state 7
+    import_command                 shift and go to state 8
+    export_command                 shift and go to state 9
+    discard_command                shift and go to state 10
+    rename_command                 shift and go to state 11
+    print_command                  shift and go to state 12
+    select_command                 shift and go to state 13
+    select_where_command           shift and go to state 14
+    select_limit_command           shift and go to state 15
+    select_where_limit_command     shift and go to state 16
+    create_select_command          shift and go to state 17
+    create_join_command            shift and go to state 18
+
+state 2
+
+    (1) program -> command .
+
+    PROCEDURE       reduce using rule 1 (program -> command .)
+    CALL            reduce using rule 1 (program -> command .)
+    IMPORT          reduce using rule 1 (program -> command .)
+    EXPORT          reduce using rule 1 (program -> command .)
+    DISCARD         reduce using rule 1 (program -> command .)
+    RENAME          reduce using rule 1 (program -> command .)
+    PRINT           reduce using rule 1 (program -> command .)
+    SELECT          reduce using rule 1 (program -> command .)
+    CREATE          reduce using rule 1 (program -> command .)
+    $end            reduce using rule 1 (program -> command .)
+
+
+state 3
+
+    (3) command -> table_command .
+
+    PROCEDURE       reduce using rule 3 (command -> table_command .)
+    CALL            reduce using rule 3 (command -> table_command .)
+    IMPORT          reduce using rule 3 (command -> table_command .)
+    EXPORT          reduce using rule 3 (command -> table_command .)
+    DISCARD         reduce using rule 3 (command -> table_command .)
+    RENAME          reduce using rule 3 (command -> table_command .)
+    PRINT           reduce using rule 3 (command -> table_command .)
+    SELECT          reduce using rule 3 (command -> table_command .)
+    CREATE          reduce using rule 3 (command -> table_command .)
+    $end            reduce using rule 3 (command -> table_command .)
+    END             reduce using rule 3 (command -> table_command .)
+
+
+state 4
+
+    (4) command -> query_command .
+
+    PROCEDURE       reduce using rule 4 (command -> query_command .)
+    CALL            reduce using rule 4 (command -> query_command .)
+    IMPORT          reduce using rule 4 (command -> query_command .)
+    EXPORT          reduce using rule 4 (command -> query_command .)
+    DISCARD         reduce using rule 4 (command -> query_command .)
+    RENAME          reduce using rule 4 (command -> query_command .)
+    PRINT           reduce using rule 4 (command -> query_command .)
+    SELECT          reduce using rule 4 (command -> query_command .)
+    CREATE          reduce using rule 4 (command -> query_command .)
+    $end            reduce using rule 4 (command -> query_command .)
+    END             reduce using rule 4 (command -> query_command .)
+
+
+state 5
+
+    (5) command -> create_command .
+
+    PROCEDURE       reduce using rule 5 (command -> create_command .)
+    CALL            reduce using rule 5 (command -> create_command .)
+    IMPORT          reduce using rule 5 (command -> create_command .)
+    EXPORT          reduce using rule 5 (command -> create_command .)
+    DISCARD         reduce using rule 5 (command -> create_command .)
+    RENAME          reduce using rule 5 (command -> create_command .)
+    PRINT           reduce using rule 5 (command -> create_command .)
+    SELECT          reduce using rule 5 (command -> create_command .)
+    CREATE          reduce using rule 5 (command -> create_command .)
+    $end            reduce using rule 5 (command -> create_command .)
+    END             reduce using rule 5 (command -> create_command .)
+
+
+state 6
+
+    (6) command -> procedure_command .
+
+    PROCEDURE       reduce using rule 6 (command -> procedure_command .)
+    CALL            reduce using rule 6 (command -> procedure_command .)
+    IMPORT          reduce using rule 6 (command -> procedure_command .)
+    EXPORT          reduce using rule 6 (command -> procedure_command .)
+    DISCARD         reduce using rule 6 (command -> procedure_command .)
+    RENAME          reduce using rule 6 (command -> procedure_command .)
+    PRINT           reduce using rule 6 (command -> procedure_command .)
+    SELECT          reduce using rule 6 (command -> procedure_command .)
+    CREATE          reduce using rule 6 (command -> procedure_command .)
+    $end            reduce using rule 6 (command -> procedure_command .)
+    END             reduce using rule 6 (command -> procedure_command .)
+
+
+state 7
+
+    (7) command -> call_command .
+
+    PROCEDURE       reduce using rule 7 (command -> call_command .)
+    CALL            reduce using rule 7 (command -> call_command .)
+    IMPORT          reduce using rule 7 (command -> call_command .)
+    EXPORT          reduce using rule 7 (command -> call_command .)
+    DISCARD         reduce using rule 7 (command -> call_command .)
+    RENAME          reduce using rule 7 (command -> call_command .)
+    PRINT           reduce using rule 7 (command -> call_command .)
+    SELECT          reduce using rule 7 (command -> call_command .)
+    CREATE          reduce using rule 7 (command -> call_command .)
+    $end            reduce using rule 7 (command -> call_command .)
+    END             reduce using rule 7 (command -> call_command .)
+
+
+state 8
+
+    (8) table_command -> import_command .
+
+    PROCEDURE       reduce using rule 8 (table_command -> import_command .)
+    CALL            reduce using rule 8 (table_command -> import_command .)
+    IMPORT          reduce using rule 8 (table_command -> import_command .)
+    EXPORT          reduce using rule 8 (table_command -> import_command .)
+    DISCARD         reduce using rule 8 (table_command -> import_command .)
+    RENAME          reduce using rule 8 (table_command -> import_command .)
+    PRINT           reduce using rule 8 (table_command -> import_command .)
+    SELECT          reduce using rule 8 (table_command -> import_command .)
+    CREATE          reduce using rule 8 (table_command -> import_command .)
+    $end            reduce using rule 8 (table_command -> import_command .)
+    END             reduce using rule 8 (table_command -> import_command .)
+
+
+state 9
+
+    (9) table_command -> export_command .
+
+    PROCEDURE       reduce using rule 9 (table_command -> export_command .)
+    CALL            reduce using rule 9 (table_command -> export_command .)
+    IMPORT          reduce using rule 9 (table_command -> export_command .)
+    EXPORT          reduce using rule 9 (table_command -> export_command .)
+    DISCARD         reduce using rule 9 (table_command -> export_command .)
+    RENAME          reduce using rule 9 (table_command -> export_command .)
+    PRINT           reduce using rule 9 (table_command -> export_command .)
+    SELECT          reduce using rule 9 (table_command -> export_command .)
+    CREATE          reduce using rule 9 (table_command -> export_command .)
+    $end            reduce using rule 9 (table_command -> export_command .)
+    END             reduce using rule 9 (table_command -> export_command .)
+
+
+state 10
+
+    (10) table_command -> discard_command .
+
+    PROCEDURE       reduce using rule 10 (table_command -> discard_command .)
+    CALL            reduce using rule 10 (table_command -> discard_command .)
+    IMPORT          reduce using rule 10 (table_command -> discard_command .)
+    EXPORT          reduce using rule 10 (table_command -> discard_command .)
+    DISCARD         reduce using rule 10 (table_command -> discard_command .)
+    RENAME          reduce using rule 10 (table_command -> discard_command .)
+    PRINT           reduce using rule 10 (table_command -> discard_command .)
+    SELECT          reduce using rule 10 (table_command -> discard_command .)
+    CREATE          reduce using rule 10 (table_command -> discard_command .)
+    $end            reduce using rule 10 (table_command -> discard_command .)
+    END             reduce using rule 10 (table_command -> discard_command .)
+
+
+state 11
+
+    (11) table_command -> rename_command .
+
+    PROCEDURE       reduce using rule 11 (table_command -> rename_command .)
+    CALL            reduce using rule 11 (table_command -> rename_command .)
+    IMPORT          reduce using rule 11 (table_command -> rename_command .)
+    EXPORT          reduce using rule 11 (table_command -> rename_command .)
+    DISCARD         reduce using rule 11 (table_command -> rename_command .)
+    RENAME          reduce using rule 11 (table_command -> rename_command .)
+    PRINT           reduce using rule 11 (table_command -> rename_command .)
+    SELECT          reduce using rule 11 (table_command -> rename_command .)
+    CREATE          reduce using rule 11 (table_command -> rename_command .)
+    $end            reduce using rule 11 (table_command -> rename_command .)
+    END             reduce using rule 11 (table_command -> rename_command .)
+
+
+state 12
+
+    (12) table_command -> print_command .
+
+    PROCEDURE       reduce using rule 12 (table_command -> print_command .)
+    CALL            reduce using rule 12 (table_command -> print_command .)
+    IMPORT          reduce using rule 12 (table_command -> print_command .)
+    EXPORT          reduce using rule 12 (table_command -> print_command .)
+    DISCARD         reduce using rule 12 (table_command -> print_command .)
+    RENAME          reduce using rule 12 (table_command -> print_command .)
+    PRINT           reduce using rule 12 (table_command -> print_command .)
+    SELECT          reduce using rule 12 (table_command -> print_command .)
+    CREATE          reduce using rule 12 (table_command -> print_command .)
+    $end            reduce using rule 12 (table_command -> print_command .)
+    END             reduce using rule 12 (table_command -> print_command .)
+
+
+state 13
+
+    (18) query_command -> select_command .
+
+    PROCEDURE       reduce using rule 18 (query_command -> select_command .)
+    CALL            reduce using rule 18 (query_command -> select_command .)
+    IMPORT          reduce using rule 18 (query_command -> select_command .)
+    EXPORT          reduce using rule 18 (query_command -> select_command .)
+    DISCARD         reduce using rule 18 (query_command -> select_command .)
+    RENAME          reduce using rule 18 (query_command -> select_command .)
+    PRINT           reduce using rule 18 (query_command -> select_command .)
+    SELECT          reduce using rule 18 (query_command -> select_command .)
+    CREATE          reduce using rule 18 (query_command -> select_command .)
+    $end            reduce using rule 18 (query_command -> select_command .)
+    END             reduce using rule 18 (query_command -> select_command .)
+
+
+state 14
+
+    (19) query_command -> select_where_command .
+
+    PROCEDURE       reduce using rule 19 (query_command -> select_where_command .)
+    CALL            reduce using rule 19 (query_command -> select_where_command .)
+    IMPORT          reduce using rule 19 (query_command -> select_where_command .)
+    EXPORT          reduce using rule 19 (query_command -> select_where_command .)
+    DISCARD         reduce using rule 19 (query_command -> select_where_command .)
+    RENAME          reduce using rule 19 (query_command -> select_where_command .)
+    PRINT           reduce using rule 19 (query_command -> select_where_command .)
+    SELECT          reduce using rule 19 (query_command -> select_where_command .)
+    CREATE          reduce using rule 19 (query_command -> select_where_command .)
+    $end            reduce using rule 19 (query_command -> select_where_command .)
+    END             reduce using rule 19 (query_command -> select_where_command .)
+
+
+state 15
+
+    (20) query_command -> select_limit_command .
+
+    PROCEDURE       reduce using rule 20 (query_command -> select_limit_command .)
+    CALL            reduce using rule 20 (query_command -> select_limit_command .)
+    IMPORT          reduce using rule 20 (query_command -> select_limit_command .)
+    EXPORT          reduce using rule 20 (query_command -> select_limit_command .)
+    DISCARD         reduce using rule 20 (query_command -> select_limit_command .)
+    RENAME          reduce using rule 20 (query_command -> select_limit_command .)
+    PRINT           reduce using rule 20 (query_command -> select_limit_command .)
+    SELECT          reduce using rule 20 (query_command -> select_limit_command .)
+    CREATE          reduce using rule 20 (query_command -> select_limit_command .)
+    $end            reduce using rule 20 (query_command -> select_limit_command .)
+    END             reduce using rule 20 (query_command -> select_limit_command .)
+
+
+state 16
+
+    (21) query_command -> select_where_limit_command .
+
+    PROCEDURE       reduce using rule 21 (query_command -> select_where_limit_command .)
+    CALL            reduce using rule 21 (query_command -> select_where_limit_command .)
+    IMPORT          reduce using rule 21 (query_command -> select_where_limit_command .)
+    EXPORT          reduce using rule 21 (query_command -> select_where_limit_command .)
+    DISCARD         reduce using rule 21 (query_command -> select_where_limit_command .)
+    RENAME          reduce using rule 21 (query_command -> select_where_limit_command .)
+    PRINT           reduce using rule 21 (query_command -> select_where_limit_command .)
+    SELECT          reduce using rule 21 (query_command -> select_where_limit_command .)
+    CREATE          reduce using rule 21 (query_command -> select_where_limit_command .)
+    $end            reduce using rule 21 (query_command -> select_where_limit_command .)
+    END             reduce using rule 21 (query_command -> select_where_limit_command .)
+
+
+state 17
+
+    (40) create_command -> create_select_command .
+
+    PROCEDURE       reduce using rule 40 (create_command -> create_select_command .)
+    CALL            reduce using rule 40 (create_command -> create_select_command .)
+    IMPORT          reduce using rule 40 (create_command -> create_select_command .)
+    EXPORT          reduce using rule 40 (create_command -> create_select_command .)
+    DISCARD         reduce using rule 40 (create_command -> create_select_command .)
+    RENAME          reduce using rule 40 (create_command -> create_select_command .)
+    PRINT           reduce using rule 40 (create_command -> create_select_command .)
+    SELECT          reduce using rule 40 (create_command -> create_select_command .)
+    CREATE          reduce using rule 40 (create_command -> create_select_command .)
+    $end            reduce using rule 40 (create_command -> create_select_command .)
+    END             reduce using rule 40 (create_command -> create_select_command .)
+
+
+state 18
+
+    (41) create_command -> create_join_command .
+
+    PROCEDURE       reduce using rule 41 (create_command -> create_join_command .)
+    CALL            reduce using rule 41 (create_command -> create_join_command .)
+    IMPORT          reduce using rule 41 (create_command -> create_join_command .)
+    EXPORT          reduce using rule 41 (create_command -> create_join_command .)
+    DISCARD         reduce using rule 41 (create_command -> create_join_command .)
+    RENAME          reduce using rule 41 (create_command -> create_join_command .)
+    PRINT           reduce using rule 41 (create_command -> create_join_command .)
+    SELECT          reduce using rule 41 (create_command -> create_join_command .)
+    CREATE          reduce using rule 41 (create_command -> create_join_command .)
+    $end            reduce using rule 41 (create_command -> create_join_command .)
+    END             reduce using rule 41 (create_command -> create_join_command .)
+
+
+state 19
+
+    (45) procedure_command -> PROCEDURE . ID DO procedure_body END
+
+    ID              shift and go to state 29
+
+
+state 20
+
+    (48) call_command -> CALL . ID
+
+    ID              shift and go to state 30
+
+
+state 21
+
+    (13) import_command -> IMPORT . TABLE ID FROM STRING
+
+    TABLE           shift and go to state 31
+
+
+state 22
+
+    (14) export_command -> EXPORT . TABLE ID AS STRING
+
+    TABLE           shift and go to state 32
+
+
+state 23
+
+    (15) discard_command -> DISCARD . TABLE ID
+
+    TABLE           shift and go to state 33
+
+
+state 24
+
+    (16) rename_command -> RENAME . TABLE ID ID
+
+    TABLE           shift and go to state 34
+
+
+state 25
+
+    (17) print_command -> PRINT . TABLE ID
+
+    TABLE           shift and go to state 35
+
+
+state 26
+
+    (22) select_command -> SELECT . select_list FROM ID
+    (23) select_where_command -> SELECT . select_list FROM ID WHERE condition
+    (24) select_limit_command -> SELECT . select_list FROM ID LIMIT NUMBER
+    (25) select_where_limit_command -> SELECT . select_list FROM ID WHERE condition LIMIT NUMBER
+    (26) select_list -> . ASTERISK
+    (27) select_list -> . id_list
+    (28) id_list -> . ID
+    (29) id_list -> . id_list COMMA ID
+
+    ASTERISK        shift and go to state 38
+    ID              shift and go to state 37
+
+    select_list                    shift and go to state 36
+    id_list                        shift and go to state 39
+
+state 27
+
+    (42) create_select_command -> CREATE . TABLE ID SELECT select_list FROM ID WHERE condition
+    (43) create_select_command -> CREATE . TABLE ID SELECT select_list FROM ID
+    (44) create_join_command -> CREATE . TABLE ID FROM ID JOIN ID USING ID
+
+    TABLE           shift and go to state 40
+
+
+state 28
+
+    (2) program -> program command .
+
+    PROCEDURE       reduce using rule 2 (program -> program command .)
+    CALL            reduce using rule 2 (program -> program command .)
+    IMPORT          reduce using rule 2 (program -> program command .)
+    EXPORT          reduce using rule 2 (program -> program command .)
+    DISCARD         reduce using rule 2 (program -> program command .)
+    RENAME          reduce using rule 2 (program -> program command .)
+    PRINT           reduce using rule 2 (program -> program command .)
+    SELECT          reduce using rule 2 (program -> program command .)
+    CREATE          reduce using rule 2 (program -> program command .)
+    $end            reduce using rule 2 (program -> program command .)
+
+
+state 29
+
+    (45) procedure_command -> PROCEDURE ID . DO procedure_body END
+
+    DO              shift and go to state 41
+
+
+state 30
+
+    (48) call_command -> CALL ID .
+
+    PROCEDURE       reduce using rule 48 (call_command -> CALL ID .)
+    CALL            reduce using rule 48 (call_command -> CALL ID .)
+    IMPORT          reduce using rule 48 (call_command -> CALL ID .)
+    EXPORT          reduce using rule 48 (call_command -> CALL ID .)
+    DISCARD         reduce using rule 48 (call_command -> CALL ID .)
+    RENAME          reduce using rule 48 (call_command -> CALL ID .)
+    PRINT           reduce using rule 48 (call_command -> CALL ID .)
+    SELECT          reduce using rule 48 (call_command -> CALL ID .)
+    CREATE          reduce using rule 48 (call_command -> CALL ID .)
+    $end            reduce using rule 48 (call_command -> CALL ID .)
+    END             reduce using rule 48 (call_command -> CALL ID .)
+
+
+state 31
+
+    (13) import_command -> IMPORT TABLE . ID FROM STRING
+
+    ID              shift and go to state 42
+
+
+state 32
+
+    (14) export_command -> EXPORT TABLE . ID AS STRING
+
+    ID              shift and go to state 43
+
+
+state 33
+
+    (15) discard_command -> DISCARD TABLE . ID
+
+    ID              shift and go to state 44
+
+
+state 34
+
+    (16) rename_command -> RENAME TABLE . ID ID
+
+    ID              shift and go to state 45
+
+
+state 35
+
+    (17) print_command -> PRINT TABLE . ID
+
+    ID              shift and go to state 46
+
+
+state 36
+
+    (22) select_command -> SELECT select_list . FROM ID
+    (23) select_where_command -> SELECT select_list . FROM ID WHERE condition
+    (24) select_limit_command -> SELECT select_list . FROM ID LIMIT NUMBER
+    (25) select_where_limit_command -> SELECT select_list . FROM ID WHERE condition LIMIT NUMBER
+
+    FROM            shift and go to state 47
+
+
+state 37
+
+    (28) id_list -> ID .
+
+    COMMA           reduce using rule 28 (id_list -> ID .)
+    FROM            reduce using rule 28 (id_list -> ID .)
+
+
+state 38
+
+    (26) select_list -> ASTERISK .
+
+    FROM            reduce using rule 26 (select_list -> ASTERISK .)
+
+
+state 39
+
+    (27) select_list -> id_list .
+    (29) id_list -> id_list . COMMA ID
+
+    FROM            reduce using rule 27 (select_list -> id_list .)
+    COMMA           shift and go to state 48
+
+
+state 40
+
+    (42) create_select_command -> CREATE TABLE . ID SELECT select_list FROM ID WHERE condition
+    (43) create_select_command -> CREATE TABLE . ID SELECT select_list FROM ID
+    (44) create_join_command -> CREATE TABLE . ID FROM ID JOIN ID USING ID
+
+    ID              shift and go to state 49
+
+
+state 41
+
+    (45) procedure_command -> PROCEDURE ID DO . procedure_body END
+    (46) procedure_body -> . command
+    (47) procedure_body -> . procedure_body command
+    (3) command -> . table_command
+    (4) command -> . query_command
+    (5) command -> . create_command
+    (6) command -> . procedure_command
+    (7) command -> . call_command
+    (8) table_command -> . import_command
+    (9) table_command -> . export_command
+    (10) table_command -> . discard_command
+    (11) table_command -> . rename_command
+    (12) table_command -> . print_command
+    (18) query_command -> . select_command
+    (19) query_command -> . select_where_command
+    (20) query_command -> . select_limit_command
+    (21) query_command -> . select_where_limit_command
+    (40) create_command -> . create_select_command
+    (41) create_command -> . create_join_command
+    (45) procedure_command -> . PROCEDURE ID DO procedure_body END
+    (48) call_command -> . CALL ID
+    (13) import_command -> . IMPORT TABLE ID FROM STRING
+    (14) export_command -> . EXPORT TABLE ID AS STRING
+    (15) discard_command -> . DISCARD TABLE ID
+    (16) rename_command -> . RENAME TABLE ID ID
+    (17) print_command -> . PRINT TABLE ID
+    (22) select_command -> . SELECT select_list FROM ID
+    (23) select_where_command -> . SELECT select_list FROM ID WHERE condition
+    (24) select_limit_command -> . SELECT select_list FROM ID LIMIT NUMBER
+    (25) select_where_limit_command -> . SELECT select_list FROM ID WHERE condition LIMIT NUMBER
+    (42) create_select_command -> . CREATE TABLE ID SELECT select_list FROM ID WHERE condition
+    (43) create_select_command -> . CREATE TABLE ID SELECT select_list FROM ID
+    (44) create_join_command -> . CREATE TABLE ID FROM ID JOIN ID USING ID
+
+    PROCEDURE       shift and go to state 19
+    CALL            shift and go to state 20
+    IMPORT          shift and go to state 21
+    EXPORT          shift and go to state 22
+    DISCARD         shift and go to state 23
+    RENAME          shift and go to state 24
+    PRINT           shift and go to state 25
+    SELECT          shift and go to state 26
+    CREATE          shift and go to state 27
+
+    procedure_body                 shift and go to state 50
+    command                        shift and go to state 51
+    table_command                  shift and go to state 3
+    query_command                  shift and go to state 4
+    create_command                 shift and go to state 5
+    procedure_command              shift and go to state 6
+    call_command                   shift and go to state 7
+    import_command                 shift and go to state 8
+    export_command                 shift and go to state 9
+    discard_command                shift and go to state 10
+    rename_command                 shift and go to state 11
+    print_command                  shift and go to state 12
+    select_command                 shift and go to state 13
+    select_where_command           shift and go to state 14
+    select_limit_command           shift and go to state 15
+    select_where_limit_command     shift and go to state 16
+    create_select_command          shift and go to state 17
+    create_join_command            shift and go to state 18
+
+state 42
+
+    (13) import_command -> IMPORT TABLE ID . FROM STRING
+
+    FROM            shift and go to state 52
+
+
+state 43
+
+    (14) export_command -> EXPORT TABLE ID . AS STRING
+
+    AS              shift and go to state 53
+
+
+state 44
+
+    (15) discard_command -> DISCARD TABLE ID .
+
+    PROCEDURE       reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    CALL            reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    IMPORT          reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    EXPORT          reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    DISCARD         reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    RENAME          reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    PRINT           reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    SELECT          reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    CREATE          reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    $end            reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+    END             reduce using rule 15 (discard_command -> DISCARD TABLE ID .)
+
+
+state 45
+
+    (16) rename_command -> RENAME TABLE ID . ID
+
+    ID              shift and go to state 54
+
+
+state 46
+
+    (17) print_command -> PRINT TABLE ID .
+
+    PROCEDURE       reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    CALL            reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    IMPORT          reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    EXPORT          reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    DISCARD         reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    RENAME          reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    PRINT           reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    SELECT          reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    CREATE          reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    $end            reduce using rule 17 (print_command -> PRINT TABLE ID .)
+    END             reduce using rule 17 (print_command -> PRINT TABLE ID .)
+
+
+state 47
+
+    (22) select_command -> SELECT select_list FROM . ID
+    (23) select_where_command -> SELECT select_list FROM . ID WHERE condition
+    (24) select_limit_command -> SELECT select_list FROM . ID LIMIT NUMBER
+    (25) select_where_limit_command -> SELECT select_list FROM . ID WHERE condition LIMIT NUMBER
+
+    ID              shift and go to state 55
+
+
+state 48
+
+    (29) id_list -> id_list COMMA . ID
+
+    ID              shift and go to state 56
+
+
+state 49
+
+    (42) create_select_command -> CREATE TABLE ID . SELECT select_list FROM ID WHERE condition
+    (43) create_select_command -> CREATE TABLE ID . SELECT select_list FROM ID
+    (44) create_join_command -> CREATE TABLE ID . FROM ID JOIN ID USING ID
+
+    SELECT          shift and go to state 57
+    FROM            shift and go to state 58
+
+
+state 50
+
+    (45) procedure_command -> PROCEDURE ID DO procedure_body . END
+    (47) procedure_body -> procedure_body . command
+    (3) command -> . table_command
+    (4) command -> . query_command
+    (5) command -> . create_command
+    (6) command -> . procedure_command
+    (7) command -> . call_command
+    (8) table_command -> . import_command
+    (9) table_command -> . export_command
+    (10) table_command -> . discard_command
+    (11) table_command -> . rename_command
+    (12) table_command -> . print_command
+    (18) query_command -> . select_command
+    (19) query_command -> . select_where_command
+    (20) query_command -> . select_limit_command
+    (21) query_command -> . select_where_limit_command
+    (40) create_command -> . create_select_command
+    (41) create_command -> . create_join_command
+    (45) procedure_command -> . PROCEDURE ID DO procedure_body END
+    (48) call_command -> . CALL ID
+    (13) import_command -> . IMPORT TABLE ID FROM STRING
+    (14) export_command -> . EXPORT TABLE ID AS STRING
+    (15) discard_command -> . DISCARD TABLE ID
+    (16) rename_command -> . RENAME TABLE ID ID
+    (17) print_command -> . PRINT TABLE ID
+    (22) select_command -> . SELECT select_list FROM ID
+    (23) select_where_command -> . SELECT select_list FROM ID WHERE condition
+    (24) select_limit_command -> . SELECT select_list FROM ID LIMIT NUMBER
+    (25) select_where_limit_command -> . SELECT select_list FROM ID WHERE condition LIMIT NUMBER
+    (42) create_select_command -> . CREATE TABLE ID SELECT select_list FROM ID WHERE condition
+    (43) create_select_command -> . CREATE TABLE ID SELECT select_list FROM ID
+    (44) create_join_command -> . CREATE TABLE ID FROM ID JOIN ID USING ID
+
+    END             shift and go to state 59
+    PROCEDURE       shift and go to state 19
+    CALL            shift and go to state 20
+    IMPORT          shift and go to state 21
+    EXPORT          shift and go to state 22
+    DISCARD         shift and go to state 23
+    RENAME          shift and go to state 24
+    PRINT           shift and go to state 25
+    SELECT          shift and go to state 26
+    CREATE          shift and go to state 27
+
+    command                        shift and go to state 60
+    table_command                  shift and go to state 3
+    query_command                  shift and go to state 4
+    create_command                 shift and go to state 5
+    procedure_command              shift and go to state 6
+    call_command                   shift and go to state 7
+    import_command                 shift and go to state 8
+    export_command                 shift and go to state 9
+    discard_command                shift and go to state 10
+    rename_command                 shift and go to state 11
+    print_command                  shift and go to state 12
+    select_command                 shift and go to state 13
+    select_where_command           shift and go to state 14
+    select_limit_command           shift and go to state 15
+    select_where_limit_command     shift and go to state 16
+    create_select_command          shift and go to state 17
+    create_join_command            shift and go to state 18
+
+state 51
+
+    (46) procedure_body -> command .
+
+    END             reduce using rule 46 (procedure_body -> command .)
+    PROCEDURE       reduce using rule 46 (procedure_body -> command .)
+    CALL            reduce using rule 46 (procedure_body -> command .)
+    IMPORT          reduce using rule 46 (procedure_body -> command .)
+    EXPORT          reduce using rule 46 (procedure_body -> command .)
+    DISCARD         reduce using rule 46 (procedure_body -> command .)
+    RENAME          reduce using rule 46 (procedure_body -> command .)
+    PRINT           reduce using rule 46 (procedure_body -> command .)
+    SELECT          reduce using rule 46 (procedure_body -> command .)
+    CREATE          reduce using rule 46 (procedure_body -> command .)
+
+
+state 52
+
+    (13) import_command -> IMPORT TABLE ID FROM . STRING
+
+    STRING          shift and go to state 61
+
+
+state 53
+
+    (14) export_command -> EXPORT TABLE ID AS . STRING
+
+    STRING          shift and go to state 62
+
+
+state 54
+
+    (16) rename_command -> RENAME TABLE ID ID .
+
+    PROCEDURE       reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    CALL            reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    IMPORT          reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    EXPORT          reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    DISCARD         reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    RENAME          reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    PRINT           reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    SELECT          reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    CREATE          reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    $end            reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+    END             reduce using rule 16 (rename_command -> RENAME TABLE ID ID .)
+
+
+state 55
+
+    (22) select_command -> SELECT select_list FROM ID .
+    (23) select_where_command -> SELECT select_list FROM ID . WHERE condition
+    (24) select_limit_command -> SELECT select_list FROM ID . LIMIT NUMBER
+    (25) select_where_limit_command -> SELECT select_list FROM ID . WHERE condition LIMIT NUMBER
+
+    PROCEDURE       reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    CALL            reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    IMPORT          reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    EXPORT          reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    DISCARD         reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    RENAME          reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    PRINT           reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    SELECT          reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    CREATE          reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    $end            reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    END             reduce using rule 22 (select_command -> SELECT select_list FROM ID .)
+    WHERE           shift and go to state 63
+    LIMIT           shift and go to state 64
+
+
+state 56
+
+    (29) id_list -> id_list COMMA ID .
+
+    COMMA           reduce using rule 29 (id_list -> id_list COMMA ID .)
+    FROM            reduce using rule 29 (id_list -> id_list COMMA ID .)
+
+
+state 57
+
+    (42) create_select_command -> CREATE TABLE ID SELECT . select_list FROM ID WHERE condition
+    (43) create_select_command -> CREATE TABLE ID SELECT . select_list FROM ID
+    (26) select_list -> . ASTERISK
+    (27) select_list -> . id_list
+    (28) id_list -> . ID
+    (29) id_list -> . id_list COMMA ID
+
+    ASTERISK        shift and go to state 38
+    ID              shift and go to state 37
+
+    select_list                    shift and go to state 65
+    id_list                        shift and go to state 39
+
+state 58
+
+    (44) create_join_command -> CREATE TABLE ID FROM . ID JOIN ID USING ID
+
+    ID              shift and go to state 66
+
+
+state 59
+
+    (45) procedure_command -> PROCEDURE ID DO procedure_body END .
+
+    PROCEDURE       reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    CALL            reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    IMPORT          reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    EXPORT          reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    DISCARD         reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    RENAME          reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    PRINT           reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    SELECT          reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    CREATE          reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    $end            reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+    END             reduce using rule 45 (procedure_command -> PROCEDURE ID DO procedure_body END .)
+
+
+state 60
+
+    (47) procedure_body -> procedure_body command .
+
+    END             reduce using rule 47 (procedure_body -> procedure_body command .)
+    PROCEDURE       reduce using rule 47 (procedure_body -> procedure_body command .)
+    CALL            reduce using rule 47 (procedure_body -> procedure_body command .)
+    IMPORT          reduce using rule 47 (procedure_body -> procedure_body command .)
+    EXPORT          reduce using rule 47 (procedure_body -> procedure_body command .)
+    DISCARD         reduce using rule 47 (procedure_body -> procedure_body command .)
+    RENAME          reduce using rule 47 (procedure_body -> procedure_body command .)
+    PRINT           reduce using rule 47 (procedure_body -> procedure_body command .)
+    SELECT          reduce using rule 47 (procedure_body -> procedure_body command .)
+    CREATE          reduce using rule 47 (procedure_body -> procedure_body command .)
+
+
+state 61
+
+    (13) import_command -> IMPORT TABLE ID FROM STRING .
+
+    PROCEDURE       reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    CALL            reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    IMPORT          reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    EXPORT          reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    DISCARD         reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    RENAME          reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    PRINT           reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    SELECT          reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    CREATE          reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    $end            reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+    END             reduce using rule 13 (import_command -> IMPORT TABLE ID FROM STRING .)
+
+
+state 62
+
+    (14) export_command -> EXPORT TABLE ID AS STRING .
+
+    PROCEDURE       reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    CALL            reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    IMPORT          reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    EXPORT          reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    DISCARD         reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    RENAME          reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    PRINT           reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    SELECT          reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    CREATE          reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    $end            reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+    END             reduce using rule 14 (export_command -> EXPORT TABLE ID AS STRING .)
+
+
+state 63
+
+    (23) select_where_command -> SELECT select_list FROM ID WHERE . condition
+    (25) select_where_limit_command -> SELECT select_list FROM ID WHERE . condition LIMIT NUMBER
+    (30) condition -> . ID EQUALS value
+    (31) condition -> . ID NOT_EQUALS value
+    (32) condition -> . ID LESS_THAN value
+    (33) condition -> . ID GREATER_THAN value
+    (34) condition -> . ID LESS_EQUALS value
+    (35) condition -> . ID GREATER_EQUALS value
+    (36) condition -> . condition AND condition
+
+    ID              shift and go to state 67
+
+    condition                      shift and go to state 68
+
+state 64
+
+    (24) select_limit_command -> SELECT select_list FROM ID LIMIT . NUMBER
+
+    NUMBER          shift and go to state 69
+
+
+state 65
+
+    (42) create_select_command -> CREATE TABLE ID SELECT select_list . FROM ID WHERE condition
+    (43) create_select_command -> CREATE TABLE ID SELECT select_list . FROM ID
+
+    FROM            shift and go to state 70
+
+
+state 66
+
+    (44) create_join_command -> CREATE TABLE ID FROM ID . JOIN ID USING ID
+
+    JOIN            shift and go to state 71
+
+
+state 67
+
+    (30) condition -> ID . EQUALS value
+    (31) condition -> ID . NOT_EQUALS value
+    (32) condition -> ID . LESS_THAN value
+    (33) condition -> ID . GREATER_THAN value
+    (34) condition -> ID . LESS_EQUALS value
+    (35) condition -> ID . GREATER_EQUALS value
+
+    EQUALS          shift and go to state 72
+    NOT_EQUALS      shift and go to state 73
+    LESS_THAN       shift and go to state 74
+    GREATER_THAN    shift and go to state 75
+    LESS_EQUALS     shift and go to state 76
+    GREATER_EQUALS  shift and go to state 77
+
+
+state 68
+
+    (23) select_where_command -> SELECT select_list FROM ID WHERE condition .
+    (25) select_where_limit_command -> SELECT select_list FROM ID WHERE condition . LIMIT NUMBER
+    (36) condition -> condition . AND condition
+
+    PROCEDURE       reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    CALL            reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    IMPORT          reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    EXPORT          reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    DISCARD         reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    RENAME          reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    PRINT           reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    SELECT          reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    CREATE          reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    $end            reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    END             reduce using rule 23 (select_where_command -> SELECT select_list FROM ID WHERE condition .)
+    LIMIT           shift and go to state 78
+    AND             shift and go to state 79
+
+
+state 69
+
+    (24) select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .
+
+    PROCEDURE       reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    CALL            reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    IMPORT          reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    EXPORT          reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    DISCARD         reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    RENAME          reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    PRINT           reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    SELECT          reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    CREATE          reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    $end            reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+    END             reduce using rule 24 (select_limit_command -> SELECT select_list FROM ID LIMIT NUMBER .)
+
+
+state 70
+
+    (42) create_select_command -> CREATE TABLE ID SELECT select_list FROM . ID WHERE condition
+    (43) create_select_command -> CREATE TABLE ID SELECT select_list FROM . ID
+
+    ID              shift and go to state 80
+
+
+state 71
+
+    (44) create_join_command -> CREATE TABLE ID FROM ID JOIN . ID USING ID
+
+    ID              shift and go to state 81
+
+
+state 72
+
+    (30) condition -> ID EQUALS . value
+    (37) value -> . ID
+    (38) value -> . STRING
+    (39) value -> . NUMBER
+
+    ID              shift and go to state 82
+    STRING          shift and go to state 84
+    NUMBER          shift and go to state 85
+
+    value                          shift and go to state 83
+
+state 73
+
+    (31) condition -> ID NOT_EQUALS . value
+    (37) value -> . ID
+    (38) value -> . STRING
+    (39) value -> . NUMBER
+
+    ID              shift and go to state 82
+    STRING          shift and go to state 84
+    NUMBER          shift and go to state 85
+
+    value                          shift and go to state 86
+
+state 74
+
+    (32) condition -> ID LESS_THAN . value
+    (37) value -> . ID
+    (38) value -> . STRING
+    (39) value -> . NUMBER
+
+    ID              shift and go to state 82
+    STRING          shift and go to state 84
+    NUMBER          shift and go to state 85
+
+    value                          shift and go to state 87
+
+state 75
+
+    (33) condition -> ID GREATER_THAN . value
+    (37) value -> . ID
+    (38) value -> . STRING
+    (39) value -> . NUMBER
+
+    ID              shift and go to state 82
+    STRING          shift and go to state 84
+    NUMBER          shift and go to state 85
+
+    value                          shift and go to state 88
+
+state 76
+
+    (34) condition -> ID LESS_EQUALS . value
+    (37) value -> . ID
+    (38) value -> . STRING
+    (39) value -> . NUMBER
+
+    ID              shift and go to state 82
+    STRING          shift and go to state 84
+    NUMBER          shift and go to state 85
+
+    value                          shift and go to state 89
+
+state 77
+
+    (35) condition -> ID GREATER_EQUALS . value
+    (37) value -> . ID
+    (38) value -> . STRING
+    (39) value -> . NUMBER
+
+    ID              shift and go to state 82
+    STRING          shift and go to state 84
+    NUMBER          shift and go to state 85
+
+    value                          shift and go to state 90
+
+state 78
+
+    (25) select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT . NUMBER
+
+    NUMBER          shift and go to state 91
+
+
+state 79
+
+    (36) condition -> condition AND . condition
+    (30) condition -> . ID EQUALS value
+    (31) condition -> . ID NOT_EQUALS value
+    (32) condition -> . ID LESS_THAN value
+    (33) condition -> . ID GREATER_THAN value
+    (34) condition -> . ID LESS_EQUALS value
+    (35) condition -> . ID GREATER_EQUALS value
+    (36) condition -> . condition AND condition
+
+    ID              shift and go to state 67
+
+    condition                      shift and go to state 92
+
+state 80
+
+    (42) create_select_command -> CREATE TABLE ID SELECT select_list FROM ID . WHERE condition
+    (43) create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .
+
+    WHERE           shift and go to state 93
+    PROCEDURE       reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    CALL            reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    IMPORT          reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    EXPORT          reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    DISCARD         reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    RENAME          reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    PRINT           reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    SELECT          reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    CREATE          reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    $end            reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+    END             reduce using rule 43 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID .)
+
+
+state 81
+
+    (44) create_join_command -> CREATE TABLE ID FROM ID JOIN ID . USING ID
+
+    USING           shift and go to state 94
+
+
+state 82
+
+    (37) value -> ID .
+
+    LIMIT           reduce using rule 37 (value -> ID .)
+    AND             reduce using rule 37 (value -> ID .)
+    PROCEDURE       reduce using rule 37 (value -> ID .)
+    CALL            reduce using rule 37 (value -> ID .)
+    IMPORT          reduce using rule 37 (value -> ID .)
+    EXPORT          reduce using rule 37 (value -> ID .)
+    DISCARD         reduce using rule 37 (value -> ID .)
+    RENAME          reduce using rule 37 (value -> ID .)
+    PRINT           reduce using rule 37 (value -> ID .)
+    SELECT          reduce using rule 37 (value -> ID .)
+    CREATE          reduce using rule 37 (value -> ID .)
+    $end            reduce using rule 37 (value -> ID .)
+    END             reduce using rule 37 (value -> ID .)
+
+
+state 83
+
+    (30) condition -> ID EQUALS value .
+
+    LIMIT           reduce using rule 30 (condition -> ID EQUALS value .)
+    AND             reduce using rule 30 (condition -> ID EQUALS value .)
+    PROCEDURE       reduce using rule 30 (condition -> ID EQUALS value .)
+    CALL            reduce using rule 30 (condition -> ID EQUALS value .)
+    IMPORT          reduce using rule 30 (condition -> ID EQUALS value .)
+    EXPORT          reduce using rule 30 (condition -> ID EQUALS value .)
+    DISCARD         reduce using rule 30 (condition -> ID EQUALS value .)
+    RENAME          reduce using rule 30 (condition -> ID EQUALS value .)
+    PRINT           reduce using rule 30 (condition -> ID EQUALS value .)
+    SELECT          reduce using rule 30 (condition -> ID EQUALS value .)
+    CREATE          reduce using rule 30 (condition -> ID EQUALS value .)
+    $end            reduce using rule 30 (condition -> ID EQUALS value .)
+    END             reduce using rule 30 (condition -> ID EQUALS value .)
+
+
+state 84
+
+    (38) value -> STRING .
+
+    LIMIT           reduce using rule 38 (value -> STRING .)
+    AND             reduce using rule 38 (value -> STRING .)
+    PROCEDURE       reduce using rule 38 (value -> STRING .)
+    CALL            reduce using rule 38 (value -> STRING .)
+    IMPORT          reduce using rule 38 (value -> STRING .)
+    EXPORT          reduce using rule 38 (value -> STRING .)
+    DISCARD         reduce using rule 38 (value -> STRING .)
+    RENAME          reduce using rule 38 (value -> STRING .)
+    PRINT           reduce using rule 38 (value -> STRING .)
+    SELECT          reduce using rule 38 (value -> STRING .)
+    CREATE          reduce using rule 38 (value -> STRING .)
+    $end            reduce using rule 38 (value -> STRING .)
+    END             reduce using rule 38 (value -> STRING .)
+
+
+state 85
+
+    (39) value -> NUMBER .
+
+    LIMIT           reduce using rule 39 (value -> NUMBER .)
+    AND             reduce using rule 39 (value -> NUMBER .)
+    PROCEDURE       reduce using rule 39 (value -> NUMBER .)
+    CALL            reduce using rule 39 (value -> NUMBER .)
+    IMPORT          reduce using rule 39 (value -> NUMBER .)
+    EXPORT          reduce using rule 39 (value -> NUMBER .)
+    DISCARD         reduce using rule 39 (value -> NUMBER .)
+    RENAME          reduce using rule 39 (value -> NUMBER .)
+    PRINT           reduce using rule 39 (value -> NUMBER .)
+    SELECT          reduce using rule 39 (value -> NUMBER .)
+    CREATE          reduce using rule 39 (value -> NUMBER .)
+    $end            reduce using rule 39 (value -> NUMBER .)
+    END             reduce using rule 39 (value -> NUMBER .)
+
+
+state 86
+
+    (31) condition -> ID NOT_EQUALS value .
+
+    LIMIT           reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    AND             reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    PROCEDURE       reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    CALL            reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    IMPORT          reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    EXPORT          reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    DISCARD         reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    RENAME          reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    PRINT           reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    SELECT          reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    CREATE          reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    $end            reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+    END             reduce using rule 31 (condition -> ID NOT_EQUALS value .)
+
+
+state 87
+
+    (32) condition -> ID LESS_THAN value .
+
+    LIMIT           reduce using rule 32 (condition -> ID LESS_THAN value .)
+    AND             reduce using rule 32 (condition -> ID LESS_THAN value .)
+    PROCEDURE       reduce using rule 32 (condition -> ID LESS_THAN value .)
+    CALL            reduce using rule 32 (condition -> ID LESS_THAN value .)
+    IMPORT          reduce using rule 32 (condition -> ID LESS_THAN value .)
+    EXPORT          reduce using rule 32 (condition -> ID LESS_THAN value .)
+    DISCARD         reduce using rule 32 (condition -> ID LESS_THAN value .)
+    RENAME          reduce using rule 32 (condition -> ID LESS_THAN value .)
+    PRINT           reduce using rule 32 (condition -> ID LESS_THAN value .)
+    SELECT          reduce using rule 32 (condition -> ID LESS_THAN value .)
+    CREATE          reduce using rule 32 (condition -> ID LESS_THAN value .)
+    $end            reduce using rule 32 (condition -> ID LESS_THAN value .)
+    END             reduce using rule 32 (condition -> ID LESS_THAN value .)
+
+
+state 88
+
+    (33) condition -> ID GREATER_THAN value .
+
+    LIMIT           reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    AND             reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    PROCEDURE       reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    CALL            reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    IMPORT          reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    EXPORT          reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    DISCARD         reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    RENAME          reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    PRINT           reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    SELECT          reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    CREATE          reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    $end            reduce using rule 33 (condition -> ID GREATER_THAN value .)
+    END             reduce using rule 33 (condition -> ID GREATER_THAN value .)
+
+
+state 89
+
+    (34) condition -> ID LESS_EQUALS value .
+
+    LIMIT           reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    AND             reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    PROCEDURE       reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    CALL            reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    IMPORT          reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    EXPORT          reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    DISCARD         reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    RENAME          reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    PRINT           reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    SELECT          reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    CREATE          reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    $end            reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+    END             reduce using rule 34 (condition -> ID LESS_EQUALS value .)
+
+
+state 90
+
+    (35) condition -> ID GREATER_EQUALS value .
+
+    LIMIT           reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    AND             reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    PROCEDURE       reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    CALL            reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    IMPORT          reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    EXPORT          reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    DISCARD         reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    RENAME          reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    PRINT           reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    SELECT          reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    CREATE          reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    $end            reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+    END             reduce using rule 35 (condition -> ID GREATER_EQUALS value .)
+
+
+state 91
+
+    (25) select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .
+
+    PROCEDURE       reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    CALL            reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    IMPORT          reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    EXPORT          reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    DISCARD         reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    RENAME          reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    PRINT           reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    SELECT          reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    CREATE          reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    $end            reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+    END             reduce using rule 25 (select_where_limit_command -> SELECT select_list FROM ID WHERE condition LIMIT NUMBER .)
+
+
+state 92
+
+    (36) condition -> condition AND condition .
+    (36) condition -> condition . AND condition
+
+  ! shift/reduce conflict for AND resolved as shift
+    LIMIT           reduce using rule 36 (condition -> condition AND condition .)
+    PROCEDURE       reduce using rule 36 (condition -> condition AND condition .)
+    CALL            reduce using rule 36 (condition -> condition AND condition .)
+    IMPORT          reduce using rule 36 (condition -> condition AND condition .)
+    EXPORT          reduce using rule 36 (condition -> condition AND condition .)
+    DISCARD         reduce using rule 36 (condition -> condition AND condition .)
+    RENAME          reduce using rule 36 (condition -> condition AND condition .)
+    PRINT           reduce using rule 36 (condition -> condition AND condition .)
+    SELECT          reduce using rule 36 (condition -> condition AND condition .)
+    CREATE          reduce using rule 36 (condition -> condition AND condition .)
+    $end            reduce using rule 36 (condition -> condition AND condition .)
+    END             reduce using rule 36 (condition -> condition AND condition .)
+    AND             shift and go to state 79
+
+  ! AND             [ reduce using rule 36 (condition -> condition AND condition .) ]
+
+
+state 93
+
+    (42) create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE . condition
+    (30) condition -> . ID EQUALS value
+    (31) condition -> . ID NOT_EQUALS value
+    (32) condition -> . ID LESS_THAN value
+    (33) condition -> . ID GREATER_THAN value
+    (34) condition -> . ID LESS_EQUALS value
+    (35) condition -> . ID GREATER_EQUALS value
+    (36) condition -> . condition AND condition
+
+    ID              shift and go to state 67
+
+    condition                      shift and go to state 95
+
+state 94
+
+    (44) create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING . ID
+
+    ID              shift and go to state 96
+
+
+state 95
+
+    (42) create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .
+    (36) condition -> condition . AND condition
+
+    PROCEDURE       reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    CALL            reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    IMPORT          reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    EXPORT          reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    DISCARD         reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    RENAME          reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    PRINT           reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    SELECT          reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    CREATE          reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    $end            reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    END             reduce using rule 42 (create_select_command -> CREATE TABLE ID SELECT select_list FROM ID WHERE condition .)
+    AND             shift and go to state 79
+
+
+state 96
+
+    (44) create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .
+
+    PROCEDURE       reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    CALL            reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    IMPORT          reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    EXPORT          reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    DISCARD         reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    RENAME          reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    PRINT           reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    SELECT          reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    CREATE          reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    $end            reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+    END             reduce using rule 44 (create_join_command -> CREATE TABLE ID FROM ID JOIN ID USING ID .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 92 resolved as shift

@@ -1,0 +1,12 @@
+# Employee database
+name,age,department,salary
+"John Smith",30,"Engineering",75000
+"Jane Doe",35,"Marketing",80000
+"Bob Johnson",42,"HR",65000
+"Alice Brown",28,"Engineering",70000
+"Charlie Davis",45,"Marketing",90000
+"Diana Evans",38,"Finance",85000
+"Edward Foster",52,"HR",100000
+"Fiona Gray",33,"Engineering",72000
+"George Harris",47,"Finance",95000
+"Hannah Irving",29,"Marketing",68000 
