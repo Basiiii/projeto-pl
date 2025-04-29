@@ -40,6 +40,7 @@ class Lexer:
         "GREATER_EQUALS",
         "SINGLE_COMMENT",
         "MULTI_COMMENT",
+        "SEMICOLON",
     ] + list(reserved.values())
 
     # Simple rules for tokens
@@ -51,6 +52,7 @@ class Lexer:
     t_GREATER_THAN = r">"
     t_LESS_EQUALS = r"<="
     t_GREATER_EQUALS = r">="
+    t_SEMICOLON = r";"
 
     # Ignored characters
     t_ignore = " \t"
