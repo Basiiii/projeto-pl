@@ -19,12 +19,12 @@ def main():
     # Check if a file was provided as an argument
     if len(sys.argv) > 1:
         filename = sys.argv[1]
-        # Check if the file exists and has .fca extension
+        # Check if the file exists and has .cql extension
         if not os.path.exists(filename):
             print(f"Error: File {filename} does not exist.")
             sys.exit(1)
-        if not filename.endswith(".fca"):
-            print(f"Error: File {filename} must have .fca extension.")
+        if not filename.endswith(".cql"):
+            print(f"Error: File {filename} must have .cql extension.")
             sys.exit(1)
 
         # Read the file and interpret it
@@ -32,10 +32,10 @@ def main():
         interpreter.interpret(content)
     else:
         # Interactive mode
-        print("FCA Interpreter (type 'EXIT' to quit)")
+        print("CQL Interpreter (type 'EXIT' to quit)")
         while True:
             try:
-                line = input("fca> ")
+                line = input("cql> ")
                 if line.strip().upper() == "EXIT":
                     break
                 result = interpreter.interpret(line)
