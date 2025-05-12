@@ -37,28 +37,23 @@ class Parser:
         p[0] = p[1]
 
     def p_import_command(self, p):
-        """import_command : IMPORT TABLE ID FROM STRING SEMICOLON
-        | IMPORT TABLE ID FROM STRING"""
+        """import_command : IMPORT TABLE ID FROM STRING SEMICOLON"""
         p[0] = ("IMPORT", p[3], p[5])
 
     def p_export_command(self, p):
-        """export_command : EXPORT TABLE ID AS STRING SEMICOLON
-        | EXPORT TABLE ID AS STRING"""
+        """export_command : EXPORT TABLE ID AS STRING SEMICOLON"""
         p[0] = ("EXPORT", p[3], p[5])
 
     def p_discard_command(self, p):
-        """discard_command : DISCARD TABLE ID SEMICOLON
-        | DISCARD TABLE ID"""
+        """discard_command : DISCARD TABLE ID SEMICOLON"""
         p[0] = ("DISCARD", p[3])
 
     def p_rename_command(self, p):
-        """rename_command : RENAME TABLE ID ID SEMICOLON
-        | RENAME TABLE ID ID"""
+        """rename_command : RENAME TABLE ID ID SEMICOLON"""
         p[0] = ("RENAME", p[3], p[4])
 
     def p_print_command(self, p):
-        """print_command : PRINT TABLE ID SEMICOLON
-        | PRINT TABLE ID"""
+        """print_command : PRINT TABLE ID SEMICOLON"""
         p[0] = ("PRINT", p[3])
 
     # Query commands
@@ -70,23 +65,19 @@ class Parser:
         p[0] = p[1]
 
     def p_select_command(self, p):
-        """select_command : SELECT select_list FROM ID SEMICOLON
-        | SELECT select_list FROM ID"""
+        """select_command : SELECT select_list FROM ID SEMICOLON"""
         p[0] = ("SELECT", p[2], p[4], None, None)
 
     def p_select_where_command(self, p):
-        """select_where_command : SELECT select_list FROM ID WHERE condition SEMICOLON
-        | SELECT select_list FROM ID WHERE condition"""
+        """select_where_command : SELECT select_list FROM ID WHERE condition SEMICOLON"""
         p[0] = ("SELECT", p[2], p[4], p[6], None)
 
     def p_select_limit_command(self, p):
-        """select_limit_command : SELECT select_list FROM ID LIMIT NUMBER SEMICOLON
-        | SELECT select_list FROM ID LIMIT NUMBER"""
+        """select_limit_command : SELECT select_list FROM ID LIMIT NUMBER SEMICOLON"""
         p[0] = ("SELECT", p[2], p[4], None, p[6])
 
     def p_select_where_limit_command(self, p):
-        """select_where_limit_command : SELECT select_list FROM ID WHERE condition LIMIT NUMBER SEMICOLON
-        | SELECT select_list FROM ID WHERE condition LIMIT NUMBER"""
+        """select_where_limit_command : SELECT select_list FROM ID WHERE condition LIMIT NUMBER SEMICOLON"""
         p[0] = ("SELECT", p[2], p[4], p[6], p[8])
 
     def p_select_list(self, p):
@@ -129,17 +120,14 @@ class Parser:
 
     def p_create_select_command(self, p):
         """create_select_command : CREATE TABLE ID SELECT select_list FROM ID WHERE condition SEMICOLON
-        | CREATE TABLE ID SELECT select_list FROM ID WHERE condition
-        | CREATE TABLE ID SELECT select_list FROM ID SEMICOLON
-        | CREATE TABLE ID SELECT select_list FROM ID"""
-        if len(p) == 10 or len(p) == 9:
+        | CREATE TABLE ID SELECT select_list FROM ID SEMICOLON"""
+        if len(p) == 10:
             p[0] = ("CREATE_SELECT", p[3], p[5], p[7], None)
         else:
             p[0] = ("CREATE_SELECT", p[3], p[5], p[7], p[9])
 
     def p_create_join_command(self, p):
-        """create_join_command : CREATE TABLE ID FROM ID JOIN ID USING ID SEMICOLON
-        | CREATE TABLE ID FROM ID JOIN ID USING ID"""
+        """create_join_command : CREATE TABLE ID FROM ID JOIN ID USING ID SEMICOLON"""
         p[0] = ("CREATE_JOIN", p[3], p[5], p[7], p[9])
 
     # Procedure commands
@@ -157,8 +145,7 @@ class Parser:
 
     # Call command
     def p_call_command(self, p):
-        """call_command : CALL ID SEMICOLON
-        | CALL ID"""
+        """call_command : CALL ID SEMICOLON"""
         p[0] = ("CALL", p[2])
 
     # Error rule for syntax errors
