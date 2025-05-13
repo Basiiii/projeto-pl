@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Ignore output files
+./output/
+
+# Ignore all files in the output directory
+output/*

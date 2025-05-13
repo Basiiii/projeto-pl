@@ -96,7 +96,11 @@ def main():
             print("\nExecution Results:")
             result = interpreter.interpret(content)
             if result:
-                print(f"<< {result}")
+                if isinstance(result, list):
+                    for res in result:
+                        print(f"<< {res}")
+                else:
+                    print(f"<< {result}")
         except Exception as e:
             print(e, file=sys.stderr)
     else:

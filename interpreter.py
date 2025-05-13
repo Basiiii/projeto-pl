@@ -17,11 +17,12 @@ class Interpreter:
         if not parsed:
             return None
 
-        # Execute each command
+        results = []
         for command in parsed:
             result = self.execute_command(command)
             if result:
-                return result
+                results.append(result)
+        return results if results else None
 
     def execute_command(self, command):
         """Execute a single command."""
