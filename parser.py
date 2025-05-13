@@ -1,6 +1,8 @@
 import ply.yacc as yacc
 from lexer import Lexer
 
+precedence = (("left", "AND"),)
+
 
 class Parser:
     def __init__(self):
