@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[absolute,overlay]{textpos} % For positioning the logo
+\usepackage{geometry}
+
+\geometry{a4paper, margin=2.5cm}
+\begin{document}
+	\begin{titlepage}
+		% Logo in top-right corner — adjusted position and size
+		\begin{textblock*}{3cm}(14.5cm,1cm) % {width}(x, y)
+			\includegraphics[width=4cm]{images/IPCA-Logo_v2.png}
+		\end{textblock*}
+		
+		\centering
+		\vspace*{1cm}
+		{\scshape\Large Instituto Politécnico do Cávado e do Ave \par}
+		{\scshape\large Escola Superior de Tecnologia\par}
+		\vspace{2cm}
+		
+		{\huge\bfseries Trabalho Prático de Processamento de Linguagens \par}
+		\vspace{2cm}
+		
+		\begin{flushleft}
+			\textbf{Autores:} \\
+			Diogo Machado nº26042 \\
+			Enrique Rodrigues nº28602 \\
+			José Alves nº279967
+		\end{flushleft}
+		
+		\vfill
+		
+		\begin{flushright}
+			\textbf{Docente:} Óscar Ribeiro\\
+			\textbf{Data:} Maio de 2025
+		\end{flushright}
+	\end{titlepage}
+	
+\begin{abstract}
+Este artigo descreve o desenvolvimento de um interpretador para a linguagem CQL (Cassandra Query Language), 
+implementado em Python. O interpretador é capaz de processar comandos CQL, realizar análise léxica e sintática, 
+e executar operações básicas de manipulação de dados. O projeto demonstra a aplicação prática de conceitos 
+de compiladores e processamento de linguagens, incluindo análise léxica, análise sintática, e geração de 
+árvores de sintaxe abstrata (AST). São apresentados exemplos práticos de código e visualizações da AST 
+para demonstrar o funcionamento do interpretador.
+\end{abstract}
+
+\section{Introdução}
+A linguagem CQL (Cassandra Query Language) é uma linguagem de consulta semelhante ao SQL, 
+especificamente projetada para trabalhar com o Apache Cassandra. Este projeto visa desenvolver 
+um interpretador que possa processar e executar comandos CQL básicos, demonstrando os princípios 
+fundamentais de processamento de linguagens e compiladores. A implementação foi realizada em Python,
+uma linguagem que oferece excelentes ferramentas para processamento de linguagens e análise de texto.
+
+\section{Metodologia}
+O interpretador foi desenvolvido em Python, utilizando as seguintes bibliotecas principais:
+\begin{itemize}
+    \item PLY (Python Lex-Yacc) para análise léxica e sintática
+    \item Graphviz para visualização da árvore de sintaxe abstrata
+    \item PrettyTable para formatação de resultados em formato tabular
+\end{itemize}
+
+A estrutura do projeto foi organizada da seguinte forma:
+
+
+\section{Implementação}
+\subsection{Análise Léxica}
+A análise léxica é realizada através de expressões regulares que identificam os diferentes 
+tokens da linguagem CQL. O analisador léxico é implementado utilizando a biblioteca PLY, 
+que permite definir tokens através de expressões regulares. Segue um exemplo da definição 
+de alguns tokens:
+
+\begin{verbatim}
+# Tokens
+tokens = (
+    'CREATE', 'TABLE', 'INSERT', 'INTO', 'SELECT', 'FROM',
+    'WHERE', 'DELETE', 'DROP', 'IDENTIFIER', 'NUMBER',
+    'STRING', 'COMMA', 'SEMICOLON'
+)
+
+# Regras para tokens
+t_CREATE = r'CREATE'
+t_TABLE = r'TABLE'
+t_INSERT = r'INSERT'
+t_INTO = r'INTO'
+t_SELECT = r'SELECT'
+t_FROM = r'FROM'
+t_WHERE = r'WHERE'
+t_DELETE = r'DELETE'
+t_DROP = r'DROP'
+t_COMMA = r','
+t_SEMICOLON = r';'
+\end{verbatim}
+
+\subsection{Análise Sintática}
+A análise sintática é implementada usando uma gramática que define a estrutura válida dos 
+comandos CQL. A gramática suporta os seguintes tipos de comandos:
+\begin{itemize}
+    \item CREATE TABLE
+    \item INSERT INTO
+    \item SELECT
+    \item DELETE
+    \item DROP TABLE
+\end{itemize}
+
+Exemplo da definição de algumas regras gramaticais:
+
+\begin{verbatim}
+def p_create_table(p):
+    '''create_table : CREATE TABLE IDENTIFIER LPAREN column_defs RPAREN'''
+    p[0] = ('CREATE_TABLE', p[3], p[5])
+
+def p_column_defs(p):
+    '''column_defs : column_def
+                  | column_defs COMMA column_def'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
+\end{verbatim}
+
+\subsection{Árvore de Sintaxe Abstrata (AST)}
+A AST é gerada durante a análise sintática e representa a estrutura hierárquica do comando. 
+Cada nó da árvore representa uma operação ou elemento do comando, facilitando sua interpretação 
+e execução. A visualização da AST é realizada utilizando a biblioteca Graphviz.
+
+Exemplo de um comando CQL e sua representação em AST:
+
+\begin{verbatim}
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    name TEXT,
+    email TEXT
+);
+\end{verbatim}
+
+A AST gerada para este comando é visualizada como uma árvore onde:
+\begin{itemize}
+    \item O nó raiz representa o comando CREATE TABLE
+    \item Os nós filhos representam o nome da tabela e as definições das colunas
+    \item Cada definição de coluna contém o nome, tipo e restrições
+\end{itemize}
+
+\section{Resultados}
+O interpretador foi testado com diversos comandos CQL, demonstrando sua capacidade de:
+\begin{itemize}
+    \item Processar comandos sintaticamente corretos
+    \item Gerar visualizações da AST
+    \item Executar operações básicas de manipulação de dados
+    \item Apresentar resultados em formato tabular
+\end{itemize}
+
+Exemplo de execução de um comando SELECT:
+
+\begin{verbatim}
+SELECT * FROM users WHERE id = 1;
+\end{verbatim}
+
+Resultado apresentado em formato tabular:
+\begin{verbatim}
++----+--------+------------------+
+| id |  name  |      email      |
++----+--------+------------------+
+| 1  | João   | joao@email.com  |
++----+--------+------------------+
+\end{verbatim}
+
+\section{Conclusão}
+O desenvolvimento deste interpretador CQL demonstrou a aplicação prática de conceitos 
+fundamentais de compiladores e processamento de linguagens. O projeto pode ser expandido 
+para suportar mais funcionalidades da linguagem CQL, tais como:
+\begin{itemize}
+    \item Suporte a índices secundários
+    \item Implementação de transações
+    \item Otimização de consultas
+    \item Suporte a tipos de dados mais complexos
+\end{itemize}
+
+A implementação atual serve como uma base sólida para futuras expansões e melhorias, 
+demonstrando a viabilidade de desenvolver um interpretador completo para a linguagem CQL 
+utilizando Python e suas bibliotecas de processamento de linguagens.
+
+\end{document}
