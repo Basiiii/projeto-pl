@@ -34,67 +34,83 @@
 			\textbf{Docente:} Óscar Ribeiro\\
 			\textbf{Data:} Maio de 2025
 		\end{flushright}
-	\end{titlepage}
-	
-\begin{abstract}
-Este artigo descreve o desenvolvimento de um interpretador para a linguagem CQL (Cassandra Query Language), 
-implementado em Python. O interpretador é capaz de processar comandos CQL, realizar análise léxica e sintática, 
-e executar operações básicas de manipulação de dados. O projeto demonstra a aplicação prática de conceitos 
-de compiladores e processamento de linguagens, incluindo análise léxica, análise sintática, e geração de 
-árvores de sintaxe abstrata (AST). São apresentados exemplos práticos de código e visualizações da AST 
-para demonstrar o funcionamento do interpretador.
-\end{abstract}
-
+	\end{titlepage}	
 \section{Introdução}
-A linguagem CQL (Cassandra Query Language) é uma linguagem de consulta semelhante ao SQL, 
-especificamente projetada para trabalhar com o Apache Cassandra. Este projeto visa desenvolver 
-um interpretador que possa processar e executar comandos CQL básicos, demonstrando os princípios 
-fundamentais de processamento de linguagens e compiladores. A implementação foi realizada em Python,
-uma linguagem que oferece excelentes ferramentas para processamento de linguagens e análise de texto.
 
+Com este trabalho prático pretendemos adquirir experiência na conceção e implementação  de analisadores léxicos e sintáticos bem como a definição de ações semânticas que traduzem a linguagem de entrada. Entregamos uma solução que serve de alternativa à linguagem de interrogação de base de dados relacionais, que seja exxecutada sobre ficheiros de texto organizados num formato separado por vírgulas CSV (\textit{Comma Separated Value}).
 \section{Metodologia}
 O interpretador foi desenvolvido em Python, utilizando as seguintes bibliotecas principais:
 \begin{itemize}
-    \item PLY (Python Lex-Yacc) para análise léxica e sintática
-    \item Graphviz para visualização da árvore de sintaxe abstrata
-    \item PrettyTable para formatação de resultados em formato tabular
+    \item \textbf{PLY (Python Lex-Yacc):} para análise léxica e sintática
+    \item \textbf{Graphviz:} para visualização gráfica da árvore de sintaxe abstrata
+    \item \textbf{PrettyPrinter:} para formatação de resultados em formato tabular
 \end{itemize}
 
 A estrutura do projeto foi organizada da seguinte forma:
 
 
+
 \section{Implementação}
 \subsection{Análise Léxica}
 A análise léxica é realizada através de expressões regulares que identificam os diferentes 
-tokens da linguagem CQL. O analisador léxico é implementado utilizando a biblioteca PLY, 
-que permite definir tokens através de expressões regulares. Segue um exemplo da definição 
-de alguns tokens:
+tokens da nossa linguagem. O analisador léxico é implementado utilizando a biblioteca PLY, 
+que permite definir tokens através de expressões regulares. Segue um exemplo da definição da maioria dos tokens, das palavras reservadas e as regras dos tokens:
 
 \begin{verbatim}
-# Tokens
-tokens = (
-    'CREATE', 'TABLE', 'INSERT', 'INTO', 'SELECT', 'FROM',
-    'WHERE', 'DELETE', 'DROP', 'IDENTIFIER', 'NUMBER',
-    'STRING', 'COMMA', 'SEMICOLON'
-)
-
+#Lista de tokens
+tokens = [
+"ID",
+"STRING",
+"NUMBER",
+"ASTERISK",
+"COMMA",
+"EQUALS",
+"NOT_EQUALS",
+"LESS_THAN",
+"GREATER_THAN",
+"LESS_EQUALS",
+"GREATER_EQUALS",
+"SINGLE_COMMENT",
+"MULTI_COMMENT",
+"SEMICOLON",
+]
+ 
+#Palavras reservadas
+reserved = {
+"import": "IMPORT",
+"table": "TABLE",
+"from": "FROM",
+"export": "EXPORT",
+"as": "AS",
+"discard": "DISCARD",
+"rename": "RENAME",
+"print": "PRINT",
+"select": "SELECT",
+"where": "WHERE",
+"limit": "LIMIT",
+"create": "CREATE",
+"join": "JOIN",
+"using": "USING",
+"procedure": "PROCEDURE",
+"do": "DO",
+"end": "END",
+"call": "CALL",
+"and": "AND",
+}
 # Regras para tokens
-t_CREATE = r'CREATE'
-t_TABLE = r'TABLE'
-t_INSERT = r'INSERT'
-t_INTO = r'INTO'
-t_SELECT = r'SELECT'
-t_FROM = r'FROM'
-t_WHERE = r'WHERE'
-t_DELETE = r'DELETE'
-t_DROP = r'DROP'
-t_COMMA = r','
-t_SEMICOLON = r';'
+t_ASTERISK = r"\*"
+t_COMMA = r","
+t_EQUALS = r"="
+t_NOT_EQUALS = r"<>"
+t_LESS_THAN = r"<"
+t_GREATER_THAN = r">"
+t_LESS_EQUALS = r"<="
+t_GREATER_EQUALS = r">="
+t_SEMICOLON = r";"
 \end{verbatim}
 
 \subsection{Análise Sintática}
-A análise sintática é implementada usando uma gramática que define a estrutura válida dos 
-comandos CQL. A gramática suporta os seguintes tipos de comandos:
+A análise sintática é implementada usando uma gramática que define a estrutura válida dos comandos CQL. A gramática suporta os seguintes tipos de comandos:
 \begin{itemize}
     \item CREATE TABLE
     \item INSERT INTO
@@ -122,7 +138,7 @@ def p_column_defs(p):
 \subsection{Árvore de Sintaxe Abstrata (AST)}
 A AST é gerada durante a análise sintática e representa a estrutura hierárquica do comando. 
 Cada nó da árvore representa uma operação ou elemento do comando, facilitando sua interpretação 
-e execução. A visualização da AST é realizada utilizando a biblioteca Graphviz.
+e execução. Também disponiblizamos uma visualização gráfica da AST, que é realizada utilizando a biblioteca Graphviz.
 
 Exemplo de um comando CQL e sua representação em AST:
 
